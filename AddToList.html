@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Enter items for your list here</h3>
+    <input id="input">
+    <input id="add" type="button" value="Add">
+    
+    <ul id="list"></ul>
+
+    <script>
+        "use strict";
+
+        // add onclick to add button
+        let add = document.getElementById('add');
+        add.addEventListener('click', addToList)
+
+        function addToList() {
+            let input = document.getElementById('input');
+            let inputValue = input.value;
+            if (inputValue) {
+
+                let list = document.getElementById('list');
+
+                // call clear button function
+                if (list.getElementsByTagName('li').length == 0) {
+                    addClearButton();
+                }
+
+                let newItem = document.createElement('li');
+                newItem.innerHTML = inputValue;
+                list.append(newItem);
+
+                input.value = '';
+
+
+            } else {
+                alert('Please enter a value in order to add it to your list')
+            }
+        }
+
+        function addClearButton() {
+            let list = document.getElementById('list');
+
+            let clearButton = document.createElement('input');
+            clearButton.id = 'clear';
+            clearButton.type = 'button';
+            clearButton.value = 'Clear';
+            clearButton.onclick = clearList;
+
+
+
+            list.after(clearButton);
+        }
+
+        function clearList() {
+            // clear list
+            let list = document.getElementById('list');
+
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+
+            // remove clear button
+            let clearButton = document.getElementById('clear');
+            clearButton.remove();
+        }
+
+    </script>
+</body>
+</html>
